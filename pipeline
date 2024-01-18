@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Define tus variables
+DOCKER_USERNAME="tu_usuario_de_dockerhub"
+DOCKER_PASSWORD="tu_contraseña_de_dockerhub"
+IMAGE_NAME="nombre_de_la_imagen"
+DOCKERFILE_PATH="ruta_al_Dockerfile"
+
+# Iniciar sesión en Docker Hub
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+# Construir la imagen Docker
+docker build -t "$IMAGE_NAME" -f "$DOCKERFILE_PATH" .
+
+# Subir la imagen a Docker Hub
+docker push "$IMAGE_NAME"
+
+# Cerrar sesión en Docker Hub
+docker logout
+
